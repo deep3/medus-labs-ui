@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">Clean All Data Request Sent</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  All data from the Medus Labs Application is being deleted. This includes EC2 Keys, users and labs.
+  <p></p>
+  <p><b>No. of Accounts Successfully Cleaned:</b>
+    {{numberofdeleted}} <i *ngIf="isLoading()" class="fa fa-spinner fa-pulse fa-fw"></i></p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="dismissModal()">Close</button>
+</div>

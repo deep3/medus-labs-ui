@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                Student Accounts
+                <div *ngIf="isLoading()" class="card-header-actions">
+                    <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5>Student Accounts</h5>
+                <small class="muted">
+                    <p>
+                        These accounts are a list of the AWS accounts the application will deploy labs to.
+                        There are no users for these accounts for students to login to until a lab is deployed to them.
+                        As part of the lab deployment process, an IAM user account will be created that the student uses
+                        to login.
+                    </p>
+                </small>
+                <div *ngIf="invalidAccountsList.length > 0" class="alert alert-danger">
+                    <p><i class="fa fa-exclamation-triangle"></i>We found some unexpected AWS Member Accounts. These are
+                        considered invalid and you wont be able to deploy labs to them. </p>
+                    <p><strong> Please remember this tool is designed to be run in an empty isolated environment and you
+                            should not be seeing this message!</strong></p>
+                    <ul>
+                        <li *ngFor="let invalidAccount of invalidAccountsList">{{invalidAccount.name}}
+                            ({{invalidAccount.id}})</li>
+                    </ul>
+                </div>
+                <table class="table table-bordered table-sm" mfSortBy="name" [mfData]="validAccountsList"
+                    #mfLabAccountData="mfDataTable" mfSortOrder="asc">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-6">
+                                <mfDefaultSorter by="name">Account</mfDefaultSorter>
+                            </th>
+                            <th class="col-6">
+                                <mfDefaultSorter by="id">AWS Account ID</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let account of mfLabAccountData.data" class="d-flex">
+                            <td class="col-6">{{account.name}}</td>
+                            <td class="col-6">{{account.id}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

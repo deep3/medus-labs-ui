@@ -1,0 +1,40 @@
+<app-header [fixed]="true" [asideMenuToggler]="false" [mobileAsideMenuToggler]="false" [navbarBrandFull]="{src: 'assets/logo/deep3_logo.png', width: 68, height: 25, alt: 'CoreUI Logo'}" [navbarBrandMinimized]="{src: 'assets/logo/deep3_logo.png', width: 34, height: 13, alt: 'CoreUI Logo'}"
+    [sidebarToggler]="'lg'">
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item px-2">
+            <a class="nav-link" href="#"><i class="nav-icon icon-speedometer"></i> Dashboard</a>
+        </li>
+        <li class="nav-item px-2">
+            <a class="nav-link" href="#" (click)="authService.logout()"><i class="nav-icon icon-user"></i> Logout ({{authService.getUsername()}})</a>
+        </li>
+    </ul>
+</app-header>
+<div class="app-body">
+    <app-sidebar [fixed]="true" [display]="'lg'">
+        <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+        <app-sidebar-minimizer></app-sidebar-minimizer>
+    </app-sidebar>
+    <!-- Main content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb">
+            <app-breadcrumb></app-breadcrumb>
+
+        </ol>
+        <div class="container-fluid">
+
+            <router-outlet>
+            </router-outlet>
+
+        </div>
+        <!-- /.container-fluid -->
+    </main>
+
+</div>
+<div class="fixed-bottom">
+    <app-footer>
+        <span><a href="https://deep3.co.uk">Medus Labs &copy; 2019 Deep3.</a></span>
+        <span class="ml-auto"><b>Version 1.0</b></span>
+        <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>
+    </app-footer>
+</div>

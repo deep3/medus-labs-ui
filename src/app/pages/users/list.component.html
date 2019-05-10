@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                Users
+            </div>
+            <div class="card-body">
+                <h5>Users</h5>
+                <small class="muted">
+                    <p> The following users have been created on this system. All users have full access, enabling them
+                        to deploy and undeploy labs, view logs and create other users as required.</p>
+                </small>
+                <table class="table table-bordered table-sm" [mfData]="USER_DATA" #mf="mfDataTable" [mfRowsOnPage]="20">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">
+                                <mfDefaultSorter by="id">Id</mfDefaultSorter>
+                            </th>
+                            <th class="col-8">
+                                <mfDefaultSorter by="username">Username</mfDefaultSorter>
+                            </th>
+                            <th class="col-2"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mf.data" class="d-flex">
+                            <td class="col-2">{{item.id}}</td>
+                            <td class="col-8">{{item.username}}</td>
+                            <td class="col-2 text-white"><a (click)="onModify(item)"
+                                    class="btn btn-primary btn-sm mr-1">Edit</a> <a (click)="onDelete(item.id)"
+                                    class="btn btn-danger btn-sm">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

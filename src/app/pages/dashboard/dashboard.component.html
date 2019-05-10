@@ -1,0 +1,155 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"> Medus Labs </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <i class="text-center cui-cloud-download icons d-block" style="font-size:5.5vw !important"></i>
+                    </div>
+                    <div class="col-sm-10">
+                        Medus Labs allows you to quickly configure a number of member AWS accounts via the use of
+                        Cloud Formation Scripts.
+                        <br>
+                        <br> The purpose of a lab is to provide a student with the minimum access required to complete
+                        the lesson plan and to be able to work in complete isolation from other students. When
+                        un-deploying we do all the hard work for you
+                        - removing the lab but also inspecting the students entire account and deleting any resources.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">System Summary</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body p-0 clearfix">
+                                <i class="fa fa-cogs bg-info p-4 font-2xl mr-3 float-left"></i>
+                                <div class="h5 mb-0 pt-3">{{accountId}}</div>
+                                <div class="text-muted text-uppercase font-weight-bold font-xs">Root Account ID</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body p-0 clearfix">
+                                <i [ngClass]="(assignedRole != null)?'bg-success':'bg-danger'"
+                                    class="fa fa-lock p-4 font-2xl mr-3 float-left"></i>
+                                <div [ngClass]="(assignedRole != null)?'text-success':'text-danger'"
+                                    class="h5 mb-0 pt-3">{{assignedRole || "Not Detected"}}</div>
+                                <div class="text-muted text-uppercase font-weight-bold font-xs">IAM Role Assigned</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body p-0 clearfix">
+                                <i [ngClass]="(instanceId != null)?'bg-success':'bg-danger'"
+                                    class="fa fa-server p-4 font-2xl mr-3 float-left"></i>
+                                <div [ngClass]="(instanceId != null)?'text-success':'text-danger'" class="h5 mb-0 pt-3">
+                                    {{instanceId || "Not Detected"}}</div>
+                                <div class="text-muted text-uppercase font-weight-bold font-xs">Instance ID</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div [ngClass]="(availableAccounts <= 0)?'callout-danger':'callout-success'"
+                                    class="callout">
+                                    <small class="text-muted">Available Student Accounts</small>
+                                    <br>
+                                    <strong *ngIf="availableAccounts != null; else loadingSpin" class="h4"
+                                        [class.text-danger]="availableAccounts <= 0">{{availableAccounts}}</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="callout callout-warning">
+                                    <small class="text-muted">In Use Student Accounts</small>
+                                    <br>
+                                    <strong *ngIf="inUseAccounts != null; else loadingSpin"
+                                        class="h4">{{inUseAccounts}}</strong>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="callout callout-info">
+                                    <small class="text-muted">Total Configured</small>
+                                    <br>
+                                    <strong *ngIf="totalAccounts != null; else loadingSpin"
+                                        class="h4">{{totalAccounts}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #loadingSpin>
+                            <h4><i class="fa fa-pulse fa-spinner"></i></h4>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="card text-white bg-info text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 align-self-center">
+                                <span style="font-size:1.25em">Deployed Labs</span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <a class="btn btn-primary" href="/labs">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card text-white bg-info text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 align-self-center">
+                                <span style="font-size:1.25em">New Lab</span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <a class="btn btn-primary" href="/labs">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="card text-white bg-info text-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-12 col-sm-12 align-self-center">
+                                <span style="font-size: 1.25em">Student Account List</span>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <a class="btn btn-primary" href="/accounts">
+                                    <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

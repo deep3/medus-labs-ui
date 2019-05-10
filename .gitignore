@@ -1,0 +1,22 @@
+# Ignore files
+
+# e2e
+e2e.*
+
+# dependencies
+node_modules
+coverage
+
+# IDE - vscode
+.vscode
+
+# package-lock
+package-lock.json
+
+# distributable
+dist
+
+# Stack Dump 
+*.stackdump
+reports/
+.DS_Store

@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                Labs
+                <div *ngIf="isLoading()" class="card-header-actions">
+                    <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5>Deploy a new lab</h5>
+                <small class="muted">
+                    <p>Labs are pre-formed scripts that allow is to build the student accounts into a specific
+                        environment.
+                        Each lab has a theme that makes up part of a lesson plan, maybe focusing on a specific AWS
+                        technology or just giving the student the
+                        ability to create and destroy cheap EC2 Instances.</p>
+                    <p>When a lab is deployed it takes control of creating the student user and restricting their
+                        permissions to the smallest set required, this
+                        helps you keep your lessons on track and prevents students accidentally creating big AWS bills.
+                    </p>
+                </small>
+                <table class="table table-bordered table-sm" [mfData]="AVAILABLE_LABS" #mfAvailable="mfDataTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="type">Lab Name</mfDefaultSorter>
+                            </th>
+                            <th style="width: 40%">
+                                <mfDefaultSorter by="description">Description</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="deploy"> Actions </mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mfAvailable.data">
+                            <td [innerHtml]="item.name"></td>
+                            <td [innerHtml]="item.description"></td>
+                            <td><a (click)="onDeploy(item)" class="btn btn-primary text-white btn-sm">Deploy</a>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

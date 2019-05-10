@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                Deployed Labs
+                <div *ngIf="isLoading()" class="card-header-actions">
+                    <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5>Deployed Labs</h5>
+                <small class="muted">
+                    <p>Information regarding any Labs that have either successfully or unsuccessfuly been deployed can
+                        be found in the table below. A detailed breakdown of an individual Lab deployment process can be
+                        viewed by using the corresponding 'Logs' button. </p>
+                </small>
+                <div *ngIf="isDeployedLabsZero()" class="alert alert-info">
+                    <p> <i class="fa fa-info-circle"></i> You don't have any labs currently deployed. To deploy a lab <a
+                            [routerLink]="['/labs']"> click here </a></p>
+                </div>
+                <table *ngIf="!isDeployedLabsZero()" class="table table-bordered table-sm" [mfData]="DEPLOYED_LABS"
+                    #mfDeployed="mfDataTable">
+                    <thead>
+                        <tr class="d-flex">
+                            <th class="col-2">
+                                <mfDefaultSorter by="depType">Lab Name</mfDefaultSorter>
+                            </th>
+                            <th class="col-4">
+                                <mfDefaultSorter by="depDescription">Description</mfDefaultSorter>
+                            </th>
+                            <th class="col-2">
+                                <mfDefaultSorter by="depDateDeployed">Deployment Date</mfDefaultSorter>
+                            </th>
+                            <th class="col-1">
+                                <mfDefaultSorter by="depStudents">Students</mfDefaultSorter>
+                            </th>
+                            <th class="col-3">
+                                <mfDefaultSorter by="depRemove">Status</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mfDeployed.data" class="d-flex">
+                            <td class="col-2" [innerHtml]="item.lab.name"></td>
+                            <td class="col-4" [innerHtml]="item.lab.description"></td>
+                            <td class="col-2">{{ item.deployed | date: 'short' }}</td>
+                            <td class="col-1 text-center">{{ item.labAccounts.length }}</td>
+                            <td class="col-3">
+                                <div class="pull-right">
+                                    <button *ngIf="isLabDeletable(item.deployedLabStatus)" (click)="onRemove(item)"
+                                        class="btn btn-danger btn-sm ml-1 text-white"> Remove</button>
+                                    <button (click)="onGetLogs(item)"
+                                        class="btn btn-info btn-sm ml-1 text-white">Logs</button>
+                                </div>
+                                <div *ngIf="item.deployedLabStatus === 'DELETING'">
+                                    <span class="font-weight-bold text-warning"><i
+                                            class="fa fa-spinner fa-pulse fa-fw"></i> Removing</span>
+                                </div>
+                                <div *ngIf="item.deployedLabStatus === 'ACTIVE'">
+                                    <span>
+                                        <span class="font-weight-bold text-success">Deployed</span>
+                                        <div class="pull-right">
+                                            <button *ngIf="isCredentialsStoredAndAvailable(item.id) === true"
+                                                (click)="openModalandGetLoginDetails(item)"
+                                                class="btn btn-success btn-sm ml-1 text-white">Login Data</button>
+                                        </div>
+                                    </span>
+                                </div>
+                                <div *ngIf="item.deployedLabStatus === 'FAILED'">
+                                    <span class="font-weight-bold text-danger">Failed</span>
+                                </div>
+                                <div *ngIf="item.deployedLabStatus === 'DEPLOYING'">
+                                    <span class="font-weight-bold text-warning"> <i
+                                            class="fa fa-spinner fa-pulse fa-fw"></i> Deploying</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

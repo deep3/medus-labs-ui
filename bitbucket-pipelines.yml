@@ -1,0 +1,11 @@
+image: dala00/chromium-xvfb-angular-cli # Any docker image from dokerhub with angular cli installed.
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+          - ng test --watch false --code-coverage
+          - ng build --prod

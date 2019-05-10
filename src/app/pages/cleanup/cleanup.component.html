@@ -1,0 +1,35 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <div class="card-body">
+                                <h1>Delete all Data</h1>
+                                <p>To delete all stored data, please use the button below. This will not be possible
+                                    unless you have administrator level permissions.</p>
+                                <p class="text-muted">Note: This is not the tool to delete an individual lab or user.
+                                    This instead deletes all data stored with Amazon Web Services, effectively giving
+                                    this application a clean slate.
+                                    If you are not the head of the organisation utilising Medus Labs, please check
+                                    first that they want what is in effect a factory reset,
+                                    not an individual lab or user to be deleted. Individually deleted data elements
+                                    still have their logs that can be viewed for troubleshooting purposes.
+                                </p>
+                                <hr />
+                                <div class="alert alert-danger">THE DELETION OF THIS DATA IS FINAL AND IRREVERSIBLE.
+                                    USERS, LABS AND GENERATED STUDENTS CANNOT BE RETRIEVED ONCE REMOVED FROM AMAZON WEB
+                                    SERVICES STORAGE</div>
+                                <button [disabled]="loading" class="btn btn-primary" (click)="onClick()">DELETE ALL
+                                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                                </button>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

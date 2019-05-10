@@ -1,0 +1,91 @@
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <div class="card-body">
+                                <h1>Account setup</h1>
+                                <p class="text-muted">Medus Labs automates the deployment and cleaning of multiple
+                                    AWS accounts for the purpose of short term lab style usage. Useful for training
+                                    courses, classrooms or other educational purposes. </p>
+                                <p class="text-muted">Using AWS Organisations allows us from one parent AWS account to
+                                    create a number of member AWS accounts. These member accounts (we refer to these as
+                                    student accounts) are full fledged AWS accounts that live under the umbrella
+                                    of the parent account.</p>
+                                <p>Tell us how many student accounts you wish to create, AWS has a default limit on the
+                                    number of accounts you can have for an account which currently is 9. You can raise a
+                                    support case with Amazon to have this limit increased
+                                    if you explain your use case to them. If this is a fresh account create 9 accounts,
+                                    request the limit to be raised then revisit this page to create the rest.</p>
+                                <hr />
+                                <h3>Number of Students</h3>
+                                <form [formGroup]="createAccountsForm" (ngSubmit)="onSubmit()">
+                                    <div class="form-group input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-users"></i>
+                                            </span>
+                                        </div>
+                                        <input type="number" placeholder="Number of students"
+                                            [(ngModel)]="createAccountsModel.accounts" formControlName="accounts"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.accounts.errors }" />
+                                    </div>
+                                    <small class="text-muted">The default for a new account is 9. If you exceed this
+                                        limit you will need to create a support case with AWS to raise the
+                                        limit.</small>
+                                    <hr />
+                                    <h3>Email Addresses</h3>
+                                    <p>Each AWS account requires a VALID unique email address. </p>
+                                    <div class="alert alert-danger">If you fail to use valid emails for generating
+                                        student accounts then you will have serious issues when you come to delete the
+                                        accounts!</div>
+                                    <p>As a workaround for this we will auto-generate emails in the format of:</p>
+                                    <ul>
+                                        <li>youremail+RANDOMID@yourdomain.com</li>
+                                        <li>youremail+ABCDE@yourdomain.com</li>
+                                        <li>youremail+VWXYZ@yourdomain.com</li>
+                                    </ul>
+                                    <p>This requires your email address client to support the + option when generating
+                                        emails.
+                                        <a href="https://gmail.googleblog.com/2008/03/2-hidden-ways-to-get-more-from-your.html"
+                                            target="_blank">Gmail supports this by default </a>, if you are unsure if
+                                        your email client supports this feature try sending
+                                        a test email, if it doesn't the easiest option is to quickly create a gmail
+                                        account for the member accounts to use.</p>
+                                    <div class="form-group input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-at"></i>
+                                            </span>
+                                        </div>
+                                        <input type="email" placeholder="Email" (input)="sampleEmail()"
+                                            [(ngModel)]="createAccountsModel.email" formControlName="email"
+                                            aria-describedby="passwordHelpBlock" class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    </div>
+                                    <div *ngIf="sampleEmails" class="alert alert-success">
+                                        <small id="passwordHelpBlock" class="form-text">Example:
+                                            {{sampleEmails}}</small>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <button [disabled]="loading" class="btn btn-primary">Create
+                                                    <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

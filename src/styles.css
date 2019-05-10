@@ -1,0 +1,37 @@
+ul.pagination:not(.pull-right){
+    float: left !important;
+}
+
+
+  
+  @media print {
+    body * {
+      visibility:hidden;
+    }
+    #printSection, #printSection * {
+      visibility:visible;
+    }
+    #printSection {
+      position:absolute;
+      left:0;
+      top:0;
+    }
+
+    .modal-dialog{
+        margin: 0px;
+    }
+
+    .modal-lg {
+        max-width: 100%;
+    }
+
+    .btn, .fa-print, button, .card-header {
+        visibility:hidden !important;
+    }
+
+    .card{
+      width: 100%;
+    }
+  }
+
+  

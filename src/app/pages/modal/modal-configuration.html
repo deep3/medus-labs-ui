@@ -1,0 +1,77 @@
+<div class="modal-lg modal-notify modal-info" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">DEPLOY LAB </h4>
+            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form name="form">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-12 mb-3">
+                            <label for="UserSelection"><b>Please select the number of student accounts you
+                                    need.</b></label>
+                            <input type="number" class="form-control" name="quantity" min="1" name="selected"
+                                #selected="ngModel" id="Values" [(ngModel)]="selectedValue" max="{{availableUsers}}">
+                            <small *ngIf="availableUsers">Select between 1 and {{availableUsers}}</small> <i
+                                *ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Please select the region you would like to deploy to.</label>
+                        <select [(ngModel)]="selectedRegion" class="form-control" name="regions">
+                            <option *ngFor="let region of item.regions">{{region | region}}</option>
+                        </select>
+                        <small>For more information about AWS regions click <a
+                                href="https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/getting-started.html#select-region"
+                                target="_blank">here</a>.</small>
+                    </div>
+                    <div *ngFor="let data of inputArr">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <b> Variable name: </b>{{data.value.Name}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <b> Description: </b>{{data.value.Description}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input id="{{data.value.Name}}" [ngModel]="myInput"
+                                        (ngModelChange)="onModified($event)" class="form-control"
+                                        type="{{data.value.Name}}" name="{{data.value.Name}}"
+                                        placeholder="{{data.value.Value}} " required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div *ngIf="error">
+                <div class="alert alert-danger ">
+                    The amount of users you have selected is not currently available.
+                </div>
+            </div>
+            <div *ngIf="isDirty">
+                <div class="alert alert-warning ">
+                    If the variable you entered is not in the correct format then an error will occur during deployment.
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer ">
+            <div class="form-group mr-1">
+                <button type="button" [disabled]="loading" class="btn btn-outline-dark " (click)="onSubmit()">
+                    Submit</button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-outline-dark "
+                    (click)="activeModal.close( 'Close click') ">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

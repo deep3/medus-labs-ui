@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                Deploying Lab
+                <div class="card-header-actions">
+                    <div *ngIf="!finished">
+                        Lab deployment in progress <i class="fa fa-spinner fa-pulse fa-fw"></i>
+                    </div>
+                    <div *ngIf="finished">
+                        <p><b>Completed</b></p>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isDeploymentDefunct" class="card-body">
+                <div class="alert alert-danger">
+                    <p>Deployment is no longer updating</p>
+                </div>
+            </div>
+            <div *ngIf="!isDeploymentDefunct" class="card-body">
+                <div *ngIf="isDeployedZero()" class="alert alert-info">
+                    <p><i class="fa fa-spinner fa-pulse fa-fw"></i> Allocating lab accounts</p>
+                </div>
+                <div *ngIf="!isDeployedZero()">
+                    <p>Configuring accounts for your students, this may take a long time.</p>
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Account</th>
+                                <th>Stack Id</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stack of deployingStack">
+                                <td class="text-center align-middle">
+                                    <i *ngIf="stack.status === 'DEPLOYING'" class="fa fa-2x fa-spinner fa-pulse"></i>
+                                    <i *ngIf="stack.status === 'COMPLETED'" class="fa fa-2x fa-check-circle-o"></i>
+                                    <i *ngIf="stack.status === 'FAILED'" class="fa fa-2x fa-times-circle-o"></i>
+                                </td>
+                                <td>{{ stack.accountName }} <br /> <small
+                                        class="text-muted">{{ stack.accountId }}</small></td>
+                                <td>{{ stack.stackName }}</td>
+                                <td>{{ stack.lastMessage }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
