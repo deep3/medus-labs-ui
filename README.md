@@ -1,14 +1,12 @@
-# Cirrus Formation UI
+# Medus Labs UI
 
-Cirrus Formation is a tool for automating the management of multiple AWS accounts that you need to configure identically and remove all assets when finished with. 
+Medus Labs is a tool for automating the management of multiple AWS accounts that you need to configure identically and remove all assets when finished with. 
 
 This application was developed for teaching or lab usage and can quickly setup a number of accounts for students to use for a class and then easily remove and clean up the environments after. 
 
 ## Documentation
 
-The documentation for this project is stored as part of the API. Please click [here](TODO) to view the full documentation
-
-* [Full Project Documentation](TODO)
+* [User Guide](documentation/user_guide/MedusLabsUserGuide.pdf)
 * [Building UI Locally](documentation/BUILDING.md)
 
 ## Built With
