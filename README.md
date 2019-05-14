@@ -6,9 +6,7 @@ This application was developed for teaching or lab usage and can quickly setup a
 
 ## Documentation
 
-The documentation for this project is stored as part of the API. Please click [here](TODO) to view the full documentation
-
-* [Full Project Documentation](TODO)
+* [User Guide](documentation/user_guide/MedusLabsUserGuide.pdf)
 * [Building UI Locally](documentation/BUILDING.md)
 
 ## Built With
