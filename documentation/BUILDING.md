@@ -2,7 +2,7 @@
 
 ## Prerequisites 
 
-* AWS Labs API running and configured with administrator permissions.
+* Medus Labs API running and configured with administrator permissions.
 * [NPM](https://www.npmjs.com/)
 
 # Install dependencies  
